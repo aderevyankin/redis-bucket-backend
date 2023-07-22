@@ -49,7 +49,7 @@ const streamToData = (stream, asString = false) =>
  * Получение данных из облака.
  */
 
-export const download = async (Bucket = AWS_DEFAULT_BUCKET, Key = AWS_DEFAULT_KEY) => {
+export const download = async (Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
     const command = new GetObjectCommand({ Bucket, Key })
     const { Body } = await client.send(command);
     return (await streamToData(Body));
@@ -59,7 +59,26 @@ export const download = async (Bucket = AWS_DEFAULT_BUCKET, Key = AWS_DEFAULT_KE
  * Отправка данных в облако.
  */ 
 
-export const upload = async (Body, Bucket = AWS_DEFAULT_BUCKET, Key = AWS_DEFAULT_KEY) => {
+export const upload = async (Body, Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
     const command = new PutObjectCommand({ Bucket, Key, Body })
     return await client.send(command);
 }
+
+/**
+ * Получение списка ключей.
+ */ 
+
+export const list = async (Bucket = AWS_DEFAULT_BUCKET) => {
+  const command = new ListObjectsV2Command({ Bucket });
+  let contents = [];
+  let isTruncated = true;
+    while (isTruncated) {
+      const { Contents, IsTruncated, NextContinuationToken } = await client.send(command);
+      const chunk = Contents.map((c) => `${c.Key}`);
+      contents = [...contents, ...chunk];
+      isTruncated = IsTruncated;
+      command.input.ContinuationToken = NextContinuationToken;
+    }
+    return contents
+}
+

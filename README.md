@@ -1,9 +1,39 @@
-# redis-bucket-backend
-backend for many projects using Redis and  YC bucket dump
+# Модуль для загрузки и выгрузки данных в AWS-совместимые хранилища
 
+Для корректной работы необходимо указать переменные 
+окружения (см. файл `.env.example`).
 
-Development progress and instructions [(RU)](https://precious-harrier-731.notion.site/AWS-YC-bucket-d60a94c58579413e82b2c4f6560af4ce?pvs=4)
+*Внимание!* dotenv может не работать в облаке.
+Переменные лучше инициализировать другим способом,
+например, прописать в конфигурации облачной функции
+или контейнера.
 
+Модуль содержит две функции:
 
-TODO:
-https://redis.io/docs/clients/om-clients/stack-node/
+## download
+
+Получение данных из облака.
+
+### Parameters
+
+*   `Key`   (optional, default `AWS_DEFAULT_KEY`)
+*   `Bucket`   (optional, default `AWS_DEFAULT_BUCKET`)
+
+## upload
+
+Отправка данных в облако.
+
+### Parameters
+
+*   `Body` &#x20;
+*   `Key`   (optional, default `AWS_DEFAULT_KEY`)
+*   `Bucket`   (optional, default `AWS_DEFAULT_BUCKET`)
+
+## list
+
+Получение списка ключей.
+
+### Parameters
+
+*   `Bucket`   (optional, default `AWS_DEFAULT_BUCKET`)
+

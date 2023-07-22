@@ -1,16 +1,19 @@
 {
-  "name": "s3-upload-download",
-  "version": "0.0.1",
-  "description": "",
+  "name": "@yababay67/s3-uploader",
+  "version": "1.0.1",
+  "description": "S3 upload download",
   "main": "index.js",
-  "type": "module",
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["s3", "upload", "download"],
+  "author": "Michael Belyakov",
   "license": "ISC",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.363.0"
+    "@aws-sdk/client-s3": "^3.374.0"
+  },
+  "devDependencies": {
+    "documentation": "^14.0.2"
   }
 }
