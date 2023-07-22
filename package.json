@@ -1,6 +1,6 @@
 {
   "name": "@yababay67/s3-uploader",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "S3 upload download",
   "main": "index.js",
   "private": false,
@@ -10,6 +10,10 @@
   "keywords": ["s3", "upload", "download"],
   "author": "Michael Belyakov",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aderevyankin/redis-bucket-backend/tree/s3-upload-download"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.374.0"
   },
