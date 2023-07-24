@@ -1,4 +1,4 @@
-const { GetObjectCommand, PutObjectCommand, S3Client } = require('@aws-sdk/client-s3')
+const { GetObjectCommand, PutObjectCommand, ListObjectsV2Command, S3Client } = require('@aws-sdk/client-s3')
 
 /**
  * Необходимые переменные среды и их проверка.
@@ -49,7 +49,7 @@ const streamToData = (stream, asString = false) =>
  * Получение данных из облака.
  */
 
-module.exports.download = async (Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
+const download = async (Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
     const command = new GetObjectCommand({ Bucket, Key })
     const { Body } = await client.send(command);
     return (await streamToData(Body));
@@ -59,7 +59,7 @@ module.exports.download = async (Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUC
  * Отправка данных в облако.
  */ 
 
-module.exports.upload = async (Body, Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
+const upload = async (Body, Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
     const command = new PutObjectCommand({ Bucket, Key, Body })
     return await client.send(command);
 }
@@ -68,7 +68,7 @@ module.exports.upload = async (Body, Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT
  * Получение списка ключей.
  */ 
 
-module.exports.list = async (Bucket = AWS_DEFAULT_BUCKET) => {
+const list = async (Bucket = AWS_DEFAULT_BUCKET) => {
   const command = new ListObjectsV2Command({ Bucket });
   let contents = [];
   let isTruncated = true;
@@ -81,4 +81,15 @@ module.exports.list = async (Bucket = AWS_DEFAULT_BUCKET) => {
     }
     return contents
 }
+
+/**
+ * Проверка наличия ключа в бакете.
+ */ 
+
+const exists = async (Key = AWS_DEFAULT_KEY, Bucket = AWS_DEFAULT_BUCKET) => {
+  const items = await list(Bucket)
+  return items.includes(Key)
+}
+
+module.exports = { upload, download, list, exists }
 

@@ -1,10 +1,11 @@
 {
   "name": "@yababay67/s3-uploader",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "S3 upload download",
   "main": "index.js",
   "private": false,
   "scripts": {
+    "docs": "npx documentation build -f md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["s3", "upload", "download"],

@@ -37,3 +37,11 @@
 
 *   `Bucket`   (optional, default `AWS_DEFAULT_BUCKET`)
 
+## exists
+
+Проверка наличия ключа в бакете.
+
+### Parameters
+
+*   `Key`   (optional, default `AWS_DEFAULT_KEY`)
+*   `Bucket`   (optional, default `AWS_DEFAULT_BUCKET`)
