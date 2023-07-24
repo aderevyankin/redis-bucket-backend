@@ -1,19 +1,53 @@
-import fs from 'fs';
-import { download, upload } from './s3-client.js';
-import dotenv from 'dotenv';
+const fs = require('fs';)
+const redis = require('redis')
+const md5 = require('md5')
+const { download, upload, exists } = require('@yababay67/s3-uploader')
 
-dotenv.config();
-const DUMP = 'dump.rdb';
+const { REDIS_SERVER_PATH, AWS_DEFAULT_KEY } = process.env
 
-async function test(params) {
-    if (process.argv[2] === 'up') {
-        const dump = fs.createReadStream(DUMP);
-        let result = await upload('redis-dumps', DUMP, dump);
-        console.log(result.$metadata.httpStatusCode === 200 ? 'Данные выгружены успешно' : 'Что то пошло не так!');
-    } else {
-        let result = await download('redis-dumps', 'dump.rdb');
-        await fs.writeFile(DUMP, result, () => console.log('Дамп успешно загружен!'));
+if(!REDIS_SERVER_PATH) throw 'Please setup path of redis server'
+
+const prepareDump = async () => {
+    if(await exists()){
+        const dump = await download()
+        fs.writeFileSync(dump)
     }
 }
 
-test();
+let client = null
+let saveInterval = null
+let md5Previous = null
+
+const startRedisServier = () => new Promise((resolve, reject) => {
+    const redisServer = spawn(REDIS_SERVER_PATH);
+    let message = '';
+    redisServer.stdout.on('data', (data) => {
+        message += data.toString();
+        if (message.includes('Ready to accept connections')) {
+            client = redis.createClient()
+            resolve('Redis Server успешно запущен!');
+        }
+    });
+
+    redisServer.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+        reject();
+    });
+});
+
+module.exports = req => {
+    if(!client){
+        await prepareDump()
+        await startRedisServer()
+        await client.connect()
+        saveInterval = setInterval(async () => {
+            if(!fs.existsSync(AWS_DEFAULT_KEY)) return
+            const md5Current = md5(fs.readFileSync(AWS_DEFAULT_KEY))
+            if (md5Current === md5Previous) return
+            await upload()
+            md5Previous = md5Current
+        }, 30000)
+    }
+    req.redisClient = client
+}
+
