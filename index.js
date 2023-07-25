@@ -44,6 +44,7 @@ module.exports = async (req, _, next) => {
         await client.connect()
         saveInterval = setInterval(async () => {
             if(!fs.existsSync(AWS_DEFAULT_KEY)) return
+            await client.save()
             const md5Current = md5(fs.readFileSync(AWS_DEFAULT_KEY))
             if (md5Current === md5Previous) return
             const stream = fs.createReadStream(AWS_DEFAULT_KEY)
