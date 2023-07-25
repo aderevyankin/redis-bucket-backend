@@ -47,6 +47,7 @@ module.exports = req => {
             await upload()
             md5Previous = md5Current
         }, 30000)
+        console.log('Redis server and client are ready.')
     }
     req.redisClient = client
 }
