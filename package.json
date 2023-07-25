@@ -1,6 +1,6 @@
 {
   "name": "@yababay67/redis-starter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Redis starter",
   "main": "index.js",
   "private": false,

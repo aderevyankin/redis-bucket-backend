@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { spawn } = require('child_process')
 const redis = require('redis')
 const md5 = require('md5')
 const { download, upload, exists } = require('@yababay67/s3-uploader')
