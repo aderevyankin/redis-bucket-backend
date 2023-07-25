@@ -5,13 +5,14 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "docs": "npx documentation build app.js -f md > README.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yababay67/s3-uploader": "^1.0.6",
+    "@yababay67/redis-starter": "^1.0.11",
     "documentation": "^14.0.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
