@@ -1,4 +1,4 @@
-const fs = require('fs';)
+const fs = require('fs')
 const redis = require('redis')
 const md5 = require('md5')
 const { download, upload, exists } = require('@yababay67/s3-uploader')
@@ -35,7 +35,7 @@ const startRedisServier = () => new Promise((resolve, reject) => {
     });
 });
 
-module.exports = req => {
+module.exports = async req => {
     if(!client){
         await prepareDump()
         await startRedisServer()
@@ -51,4 +51,3 @@ module.exports = req => {
     }
     req.redisClient = client
 }
-
