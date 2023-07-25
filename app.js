@@ -10,7 +10,8 @@ app.use(redisStarter)
 app.get('/', async (req, res) => {
     const r = Math.random()
     await req.redisClient.set('random', `${r}`)
-    res.end(```
+    res.end(`${r}`)
+    /*res.end(`
         <html>
         <head></head>
         <body>
@@ -19,10 +20,10 @@ app.get('/', async (req, res) => {
             <code>redis-cli get random</code>
         </pre>
         <p>It should be ${r}.</p>
-        <p>You can reload the page (F5) for one more checking.</p>
+        <p>You can <button onclick="window.location.reload()">reload</button> the page for one more checking.</p>
         </body>
         </html>
-    ```)
+    `)*/
 
 })
 
