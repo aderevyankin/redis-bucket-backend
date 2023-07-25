@@ -18,7 +18,7 @@ let client = null
 let saveInterval = null
 let md5Previous = null
 
-const startRedisServier = () => new Promise((resolve, reject) => {
+const startRedisServer = () => new Promise((resolve, reject) => {
     const redisServer = spawn(REDIS_SERVER_PATH);
     let message = '';
     redisServer.stdout.on('data', (data) => {
