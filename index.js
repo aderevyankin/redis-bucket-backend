@@ -11,7 +11,7 @@ if(!REDIS_SERVER_PATH) throw 'Please setup path of redis server'
 const prepareDump = async () => {
     if(await exists()){
         const dump = await download()
-        fs.writeFileSync(dump)
+        if(dump) fs.writeFileSync(dump)
     }
 }
 
