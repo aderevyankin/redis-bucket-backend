@@ -39,14 +39,15 @@ const startRedisServer = () => new Promise((resolve, reject) => {
 
 module.exports = async (req, _, next) => {
     if(!client){
-        //await prepareDump()
+        await prepareDump()
         await startRedisServer()
         await client.connect()
         saveInterval = setInterval(async () => {
             if(!fs.existsSync(AWS_DEFAULT_KEY)) return
             const md5Current = md5(fs.readFileSync(AWS_DEFAULT_KEY))
             if (md5Current === md5Previous) return
-            await upload()
+            const stream = fs.createReadStream(AWS_DEFAULT_KEY)
+            await upload(stream)
             md5Previous = md5Current
         }, 30000)
         console.log('Redis server and client are ready.')
