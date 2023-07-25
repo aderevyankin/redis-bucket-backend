@@ -11,8 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yababay67/redis-starter": "^1.0.9",
+    "@yababay67/s3-uploader": "^1.0.6",
+    "documentation": "^14.0.2",
     "dotenv": "^16.3.1",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "md5": "^2.3.0",
+    "redis": "^4.6.7"
   }
 }
