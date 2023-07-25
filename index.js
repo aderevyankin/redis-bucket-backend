@@ -39,7 +39,7 @@ const startRedisServer = () => new Promise((resolve, reject) => {
 
 module.exports = async (req, _, next) => {
     if(!client){
-        await prepareDump()
+        //await prepareDump()
         await startRedisServer()
         await client.connect()
         saveInterval = setInterval(async () => {
