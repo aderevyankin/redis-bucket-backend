@@ -1,15 +1,25 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import redisStarter from '@yababay67/redis-starter'
+//import redisStarter from '@yababay67/redis-starter'
 
 dotenv.config()
+const {
+    AWS_ACCESS_KEY_ID,
+    AWS_SECRET_ACCESS_KEY,
+    AWS_DEFAULT_KEY,
+    AWS_DEFAULT_BUCKET,
+    AWS_REGION,
+    AWS_ENDPOINT
+} = process.env
+
+console.log(AWS_ACCESS_KEY_ID)
 
 const app = express()
-app.use(redisStarter)
+//app.use(redisStarter)
 
 app.get('/', async (req, res) => {
     const r = Math.random()
-    await req.redisClient.set('random', `${r}`)
+    //await req.redisClient.set('random', `${r}`)
     res.end(```
         <html>
         <head></head>
@@ -28,4 +38,4 @@ app.get('/', async (req, res) => {
 
 const httpPort = process.env.HTTP_PORT || 3000
 
-app.listen(HTTP_PORT, () => console.log(`Server is listening on port ${httpPort}`))
+app.listen(httpPort, () => console.log(`Server is listening on port ${httpPort}`))
