@@ -45,7 +45,12 @@ const startRedisServer = () => new Promise((resolve, reject) => {
         reject();
     });
 });
-
+/**
+ * Экспортируемый модуль, выполняющий функцию оболочки над express-клиентом с интервалом бекапа на удалённое хранилище с помощью yababay67/s3-uploader
+ * @param {*} req - запрос
+ * @param {*} _ - ответ (response). здесь не используется, оттого заменен на прочерк
+ * @param {*} next - переход к следующему запросу, если таковой присутствует
+ */
 module.exports = async (req, _, next) => {
     if (!client) {
         await prepareDump()
