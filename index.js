@@ -49,7 +49,8 @@ module.exports = async (req, _, next) => {
             const stream = fs.createReadStream(AWS_DEFAULT_KEY)
             await upload(stream)
             md5Previous = md5Current
-        }, 30000)
+            console.log(`Backup is uploaded at ${new Date}`)
+        }, 15000)
         console.log('Redis server and client are ready.')
     }
     req.redisClient = client
