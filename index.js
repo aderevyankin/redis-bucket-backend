@@ -10,6 +10,7 @@ if(!REDIS_SERVER_PATH) throw 'Please setup path of redis server'
 
 const prepareDump = async () => {
     if(await exists()){
+        console.log('Downloading last dump from bucket...')
         const dump = await download()
         fs.writeFileSync(AWS_DEFAULT_KEY, dump)
     }
