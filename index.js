@@ -1,13 +1,17 @@
 const { GetObjectCommand, PutObjectCommand, ListObjectsV2Command, S3Client } = require('@aws-sdk/client-s3')
+const { existsSync } = require('fs')
+const dotenv = require('dotenv')
 
 /**
  * Необходимые переменные среды и их проверка.
- * Внимание! 
- * dotenv может не работать в облаке.
+ * Внимание! dotenv может не работать в облаке.
  * Переменные лучше инициализировать другим способом,
  * например, прописать в конфигурации облачной функции
  * или контейнера.
- */ 
+ */
+if(existsSync('.env')){
+  dotenv.config()
+} 
 
 const {
     AWS_ACCESS_KEY_ID,

@@ -1,6 +1,6 @@
 {
   "name": "@yababay67/s3-uploader",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "S3 upload download",
   "main": "index.js",
   "private": false,
@@ -8,7 +8,11 @@
     "docs": "npx documentation build -f md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["s3", "upload", "download"],
+  "keywords": [
+    "s3",
+    "upload",
+    "download"
+  ],
   "author": "Michael Belyakov",
   "license": "ISC",
   "repository": {
@@ -16,7 +20,8 @@
     "url": "https://github.com/aderevyankin/redis-bucket-backend/tree/s3-upload-download"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.374.0"
+    "@aws-sdk/client-s3": "^3.374.0",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "documentation": "^14.0.2"
