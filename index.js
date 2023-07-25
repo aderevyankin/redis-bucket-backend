@@ -36,7 +36,7 @@ const startRedisServer = () => new Promise((resolve, reject) => {
     });
 });
 
-module.exports = async req => {
+module.exports = async (req, _, next) => {
     if(!client){
         await prepareDump()
         await startRedisServer()
@@ -51,4 +51,5 @@ module.exports = async req => {
         console.log('Redis server and client are ready.')
     }
     req.redisClient = client
+    next()
 }
