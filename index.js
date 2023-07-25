@@ -4,7 +4,7 @@ const redis = require('redis')
 const md5 = require('md5')
 const { download, upload, exists } = require('@yababay67/s3-uploader')
 
-const { REDIS_SERVER_PATH, AWS_DEFAULT_KEY } = process.env
+const { REDIS_SERVER_PATH, AWS_DEFAULT_KEY, BUCKUP_INTERVAL } = process.env
 
 if(!REDIS_SERVER_PATH) throw 'Please setup path of redis server'
 
@@ -51,7 +51,7 @@ module.exports = async (req, _, next) => {
             await upload(stream)
             md5Previous = md5Current
             console.log(`Backup is uploaded at ${new Date}`)
-        }, 15000)
+        }, +BUCKUP_INTERVAL)
         console.log('Redis server and client are ready.')
     }
     req.redisClient = client
