@@ -1,32 +1,18 @@
 {
-  "name": "@yababay67/redis-starter",
+  "name": "web-redis-starter",
   "version": "1.0.0",
-  "description": "Redis starter",
-  "main": "index.js",
-  "private": false,
+  "description": "",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
-    "docs": "npx documentation build index.js -f md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "redis",
-    "express",
-    "middleware"
-  ],
-  "author": "Michael Belyakov",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/aderevyankin/redis-bucket-backend/tree/redis-starter"
-  },
   "dependencies": {
-    "@yababay67/s3-uploader": "^1.0.5",
-    "express": "^4.18.2",
-    "md5": "^2.3.0",
-    "redis": "^4.6.7",
-    "redis-om": "^0.4.0"
-  },
-  "devDependencies": {
-    "documentation": "^14.0.2"
+    "@yababay67/redis-starter": "^1.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
   }
 }
