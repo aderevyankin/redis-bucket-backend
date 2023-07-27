@@ -1,5 +1,5 @@
 const app = require('express')()
-const redisStarter = require('@yababay67/redis-starter')
+const { redisStarter } = require('@yababay67/redis-starter')
 const { HTTP_PORT } = process.env
 const { noteMiddleware } = require('./model')
 

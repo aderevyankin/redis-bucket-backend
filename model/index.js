@@ -1,5 +1,4 @@
-const { Schema } = require('redis-om')
-const FindableRepository = require('./findable.js')
+const { Schema, FindableRepository } = require('@yababay67/redis-starter')
 
 const noteSchema = new Schema('note', {
     picture: { type: 'string' },
@@ -16,7 +15,7 @@ module.exports.noteMiddleware = async (req, res, next) => {
     if(!noteRepository) {
         const { redisClient } = req
         noteRepository = new FindableRepository(noteSchema, redisClient)
-        console.log('Post repository is created.')
+        console.log('Note repository is created.')
     }
     req.noteRepository = noteRepository
     next()
