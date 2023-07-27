@@ -1,0 +1,8 @@
+dump.rdb
+.env
+buckets/
+node_modules/
+dist/
+src/
+content
+
