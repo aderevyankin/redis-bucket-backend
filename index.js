@@ -3,6 +3,9 @@ const { spawn } = require('child_process')
 const redis = require('redis')
 const md5 = require('md5')
 const { download, upload, exists } = require('@yababay67/s3-uploader')
+const { Schema } = require('redis-om')
+const FindableRepository = require('./findable.js') 
+
 /**
  * Получаем ключи, требующиеся для работы с AWS и redis 
  */
@@ -51,7 +54,8 @@ const startRedisServer = () => new Promise((resolve, reject) => {
  * @param {*} _ - ответ (response). здесь не используется, оттого заменен на прочерк
  * @param {*} next - переход к следующему запросу, если таковой присутствует
  */
-module.exports = async (req, _, next) => {
+
+const redisStarter = async (req, _, next) => {
     if (!client) {
         await prepareDump()
         await startRedisServer()
@@ -75,3 +79,5 @@ module.exports = async (req, _, next) => {
     req.redisClient = client
     next()
 }
+
+module.exports = { Schema, FindableRepository, redisStarter }
